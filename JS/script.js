@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", () =>{
                         mensagem += `- ${product.name} (R$ ${product.price.toFixed(2)})`
                     })
                     mensagem += `\n Total:R$${total.toFixed(2)}`
+
+                    const urlwhatsapp = ""
                 }
             })
         }
