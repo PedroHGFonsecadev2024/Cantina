@@ -42,6 +42,15 @@ document.addEventListener("DOMContentLoaded", () =>{
 
                 carditenmscontainer.appendChild(cartitem);
                 total += product.price;
+
+                checkoutbtn.addEventListener('click'), () =>{
+                    const numerowhatspp = '5515911111111'
+                    let mensagem = "Olá!Segue meu pedido: \n\n"
+                    cart.forEach(product => {
+                        mensagem += `- ${product.name} (R$ ${product.price.toFixed(2)})`
+                    })
+                    mensagem += `\n Total:R$${total.toFixed(2)}`
+                }
             })
         }
         cardtotalvalue.textContent = `R$ ${total.toFixed(2)}`
