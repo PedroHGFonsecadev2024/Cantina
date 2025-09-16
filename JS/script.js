@@ -63,3 +63,14 @@ document.addEventListener("DOMContentLoaded", () =>{
         location.reload(true)
     })
 })
+
+function fetchprodutos(){
+    fetch("http://127.0.0.1:8000/api/produtos/")
+    .then (res => res.json())
+    .then (data => renderProdutos(data))
+    .catch (err => console.error("Erro ao biscar produto ", err));
+}
+
+function renderProdutos(produtos){
+
+}
