@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () =>{
+
+    fetchprodutos();    
+
     const addToCartButton = document.querySelectorAll('.adicionar-carrinho');
     addToCartButton.forEach(button => {
         button.addEventListener('click', () =>{
@@ -27,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () =>{
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         let total = 0
 
-        if(cart.lenght == 0){
+        if(cart.length == 0){
 
         }else{
             carditenmscontainer.innerHTML = "";
@@ -50,8 +53,6 @@ document.addEventListener("DOMContentLoaded", () =>{
                         mensagem += `- ${product.name} (R$ ${product.price.toFixed(2)})`
                     })
                     mensagem += `\n Total:R$${total.toFixed(2)}`
-
-                    const urlwhatsapp = ""
                 }
             })
         }
@@ -68,9 +69,26 @@ function fetchprodutos(){
     fetch("http://127.0.0.1:8000/api/produtos/")
     .then (res => res.json())
     .then (data => renderProdutos(data))
-    .catch (err => console.error("Erro ao biscar produto ", err));
+    .catch (err => console.error("Erro ao buscar produto ", err));
 }
 
 function renderProdutos(produtos){
+    produtos.forEach(produto => {
+        categoria = produto.categoria.nome.toLowerCase();
+        const container = document.getElementById(categoria);
 
+        if(container){
+            const card = document.createElement("div");
+            card.className = "card";
+            card.setAttribute("data-name", produto.nome)
+            card.setAttribute("data-price", produto.preco)
+            card.innerHTML = `
+            <img src="${produto.imagem}" alt="${produto.descricao}">        
+            <h4>${produto.nome}</h4>
+            <p class="price">R$${produto.preco}</p>
+            <button class="adicionar-carrinho">COMPRAR</button>
+            `
+            container.appendChild(card)
+        }
+    })
 }
