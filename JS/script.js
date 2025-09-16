@@ -1,27 +1,7 @@
 document.addEventListener("DOMContentLoaded", () =>{
-
+    addcarrinho();
     fetchprodutos();    
 
-    const addToCartButton = document.querySelectorAll('.adicionar-carrinho');
-    addToCartButton.forEach(button => {
-        button.addEventListener('click', () =>{
-            const card = button.closest('.card');
-            const productName = card.getAttribute('data-name');
-            const productPrice = parseFloat(card.getAttribute('data-price')); 
-            const product = {
-                name: productName,
-                price: productPrice,
-            };
-
-            let cart = JSON.parse(localStorage.getItem('cart')) || []
-            cart.push(product)
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            alert(`${productName} foi adicionado ao carrinho!`)
-
-        })
-    })
     const carditenmscontainer = document.getElementById('card-items-container')
     const cardtotalvalue = document.getElementById('card-total-value')
     const checkoutbtn = document.getElementById('checkout-btn')
@@ -90,5 +70,28 @@ function renderProdutos(produtos){
             `
             container.appendChild(card)
         }
+    })
+}
+
+function addcarrinho(){
+    const addToCartButton = document.querySelectorAll('.adicionar-carrinho');
+    addToCartButton.forEach(button => {
+        button.addEventListener('click', () =>{
+            const card = button.closest('.card');
+            const productName = card.getAttribute('data-name');
+            const productPrice = parseFloat(card.getAttribute('data-price')); 
+            const product = {
+                name: productName,
+                price: productPrice,
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || []
+            cart.push(product)
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert(`${productName} foi adicionado ao carrinho!`)
+
+        })
     })
 }
